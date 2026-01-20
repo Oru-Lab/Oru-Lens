@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oru Lens | The Professional Smart Contract Instrument</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #050505;
+        --accent: #000000;
+        --grid-color: rgba(0,0,0,0.04);
+        --shimmer: rgba(0,0,0,0.05);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-color: #000000;
+          --text-color: #f8f8f8;
+          --accent: #ffffff;
+          --grid-color: rgba(255,255,255,0.03);
+          --shimmer: rgba(255,255,255,0.05);
+        }
+      }
+      body {
+        font-family: 'Space Grotesk', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        overflow-x: hidden;
+      }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+      
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: var(--text-color); border-radius: 20px; opacity: 0.1; }
+
+      .glass {
+        background: rgba(255, 255, 255, 0.01);
+        backdrop-filter: blur(30px) saturate(200%);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      @media (prefers-color-scheme: light) {
+        .glass {
+          background: rgba(0, 0, 0, 0.01);
+          border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+      }
+
+      .grid-pattern {
+        position: relative;
+        background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                          linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+      
+      /* Advanced Shimmer Animation */
+      .shimmer-bg {
+        position: relative;
+        overflow: hidden;
+      }
+      .shimmer-bg::after {
+        content: "";
+        position: absolute;
+        inset: -100%;
+        background: linear-gradient(
+          45deg,
+          transparent 0%,
+          transparent 40%,
+          var(--shimmer) 50%,
+          transparent 60%,
+          transparent 100%
+        );
+        animation: shimmer 10s infinite linear;
+      }
+
+      @keyframes shimmer {
+        from { transform: translateX(-50%) translateY(-50%); }
+        to { transform: translateX(50%) translateY(50%); }
+      }
+      
+      .perspective-2000 { perspective: 2000px; }
+      
+      @keyframes gear-rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes gear-rotate-reverse {
+        from { transform: rotate(360deg); }
+        to { transform: rotate(0deg); }
+      }
+      .animate-gear { animation: gear-rotate 15s linear infinite; }
+      .animate-gear-reverse { animation: gear-rotate-reverse 10s linear infinite; }
+
+      /* Preloader Styles */
+      #preloader {
+        position: fixed;
+        inset: 0;
+        background: var(--bg-color);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.8s ease, visibility 0.8s ease;
+      }
+      #preloader.fade-out {
+        opacity: 0;
+        visibility: hidden;
+      }
+      /* VS Code Dark+ theme for code blocks */
+.vscode-theme {
+  color: #d4d4d4;
+}
+
+.vscode-theme code {
+  color: inherit;
+}
+
+/* These regex-based highlights would need JavaScript, but this gives you the colors */
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+        "react": "https://esm.sh/react@^19.2.3",
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "framer-motion": "https://esm.sh/framer-motion@^12.27.0"
+      }
+    }
+    </script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

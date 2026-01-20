@@ -1,0 +1,5 @@
+{
+  "name": "Oru Lens",
+  "description": "The Smart Contract Lens for Frontend Developers. An interactive developer tool by Oru Labs to instantly generate integration guides for wagmi, ethers.js, and Viem from any ABI.",
+  "requestFramePermissions": []
+}
