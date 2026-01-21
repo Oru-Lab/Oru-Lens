@@ -136,7 +136,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, framework, itemName }) => {
 
   return (
     <div className="relative group mt-6">
-      <div className="bg-[#1e1e1e] rounded-[2rem] p-6 md:p-8 border border-white/5 overflow-x-auto min-h-[160px] shadow-2xl">
+      <div className="bg-[#1e1e1e] rounded-[2rem] p-6 md:p-8 border border-white/5 overflow-x-auto min-h-[160px] shadow-2xl scrollbar-hide">
         <div className="flex">
           {/* Line numbers */}
           <div className="select-none text-right pr-4 border-r border-white/10">
@@ -148,7 +148,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, framework, itemName }) => {
           </div>
           
           {/* Code */}
-          <div className="flex-1 overflow-x-auto pl-4">
+          <div className="flex-1 overflow-x-auto pl-4 scrollbar-hide">
             <div 
               className="mono text-[11px] md:text-[13px] leading-relaxed whitespace-pre"
               style={{ 
@@ -159,7 +159,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, framework, itemName }) => {
               {highlightedData.htmlLines.map((html, index) => (
                 <div 
                   key={index}
-                  className="h-[1.6em] leading-[1.6em] text-gray-300"
+                  className="h-[1.6em] leading-[1.6em] text-gray-300 scrollbar-hide"
                   dangerouslySetInnerHTML={{ __html: html }}
                 />
               ))}
@@ -193,7 +193,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, framework, itemName }) => {
           }
         `}</style>
       </div>
-      <div className="absolute top-4 right-4 flex gap-2">
+      { framework && <div className="absolute top-4 right-4 flex gap-2">
         <div className="glass px-3 py-1.5 rounded-xl text-[8px] font-bold uppercase tracking-widest opacity-60">
           {framework}
         </div>
@@ -203,7 +203,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, framework, itemName }) => {
         >
           {copied ? 'Copied' : 'Copy'}
         </button>
-      </div>
+      </div>}
     </div>
   );
 };

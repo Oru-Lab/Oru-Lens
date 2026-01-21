@@ -3,6 +3,7 @@ import React from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Logo } from '../components/Logo';
+import CodeBlock from '@/components/CodeBlock';
 
 const Landing: React.FC = () => {
   // Mouse hover 3D effect for the hero card
@@ -122,8 +123,8 @@ const Landing: React.FC = () => {
                     <span className="opacity-20 pb-4">ethers.js</span>
                     <span className="opacity-20 pb-4">viem</span>
                   </div>
-                  <pre className="opacity-60 overflow-x-auto whitespace-pre">
-                    {`import { useWriteContract } from 'wagmi'
+                  <pre className="opacity-60">
+                    <CodeBlock code={`import { useWriteContract } from 'wagmi'
 
 const { writeContract, isPending } = useWriteContract()
 
@@ -133,7 +134,8 @@ const handleClaim = () => {
     abi: LENS_ABI,
     functionName: 'claimRewards'
   })
-}`}
+}`}/>
+                    
                   </pre>
                 </div>
               </div>

@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@types/highlight.js": "^9.12.4",
-    "framer-motion": "^12.27.0",
+    "framer-motion": "^12.27.5",
     "highlight.js": "^11.11.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-router-dom": "^7.12.0"
+    "react-router-dom": "^7.12.0",
+    "tailwind-scrollbar-hide": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

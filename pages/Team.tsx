@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
+
 
 const Team: React.FC = () => {
   const team = [
@@ -74,9 +76,9 @@ const Team: React.FC = () => {
         <p className="text-lg opacity-30 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
           Oru Lens is an open-source spirit initiative. Contribute to the future of decentralized developer primitives.
         </p>
-        <button className="bg-current text-inverted px-16 py-6 rounded-full font-bold uppercase tracking-[0.3em] text-xs shadow-2xl shadow-current/20 hover:scale-105 active:scale-95 transition-all" style={{ backgroundColor: 'var(--text-color)', color: 'var(--bg-color)' }}>
+        <Link to="https://github.com/Oru-Lab/Oru-Lens" className="bg-current text-inverted px-16 py-6 rounded-full font-bold uppercase tracking-[0.3em] text-xs shadow-2xl shadow-current/20 hover:scale-105 active:scale-95 transition-all" style={{ backgroundColor: 'var(--text-color)', color: 'var(--bg-color)' }} onCl>
           Access Repository
-        </button>
+        </Link>
       </motion.div>
     </div>
   );
