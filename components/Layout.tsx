@@ -167,9 +167,9 @@ const Footer: React.FC = () => (
         <div className="space-y-8">
           <h4 className="text-[9px] font-bold uppercase tracking-[0.5em] opacity-20">Network</h4>
           <ul className="space-y-5 text-[10px] font-bold uppercase tracking-widest opacity-50">
-            <li><a href="#" className="hover:opacity-100 transition-opacity">GitHub Source</a></li>
-            <li><a href="#" className="hover:opacity-100 transition-opacity">Developer Hub</a></li>
-            <li><a href="#" className="hover:opacity-100 transition-opacity">X Updates</a></li>
+            <li><a href="https://github.com/Oru-Lab/Oru-Lens" className="hover:opacity-100 transition-opacity">GitHub Source</a></li>
+            <li><a href="https://github.com/Oru-Lab" className="hover:opacity-100 transition-opacity">Developer Hub</a></li>
+            <li><a href="https://x.com/OruLabs" className="hover:opacity-100 transition-opacity">X Updates</a></li>
           </ul>
         </div>
       </div>

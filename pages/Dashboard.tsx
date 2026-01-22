@@ -100,7 +100,9 @@ const FunctionCard: React.FC<{ item: AbiItem; address: string }> = ({ item, addr
                     </button>
                   ))}
                 </div>
-                <CodeBlock code={generateSnippet(activeFramework, address, item)} framework={activeFramework} itemName={item.name} />
+                <div className="overflow-x-auto scrollbar-hide">
+                  <CodeBlock code={generateSnippet(activeFramework, address, item)} framework={activeFramework} itemName={item.name} />
+                </div>
               </motion.div>
             ) : (
               <motion.div 

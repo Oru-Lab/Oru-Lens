@@ -51,16 +51,16 @@ const Landing: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
             Professional Integration Layer
           </motion.div>
-          
+
           <h1 className="text-6xl md:text-9xl font-bold tracking-tight leading-[0.85] mb-12 uppercase">
             Contract <br />
             <span className="opacity-20 italic">Visualized.</span>
           </h1>
-          
+
           <p className="text-lg md:text-2xl opacity-40 mb-16 max-w-2xl mx-auto leading-relaxed font-medium">
             The smart contract lens for senior frontend engineers. Instantly distill complex ABIs into production-ready implementation guides.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link
               to="/scan"
@@ -90,7 +90,7 @@ const Landing: React.FC = () => {
         >
           <div className="glass rounded-[3.5rem] overflow-hidden border border-black/10 dark:border-white/10 shadow-[0_50px_120px_rgba(0,0,0,0.15)] dark:shadow-[0_50px_120px_rgba(255,255,255,0.03)] p-1 md:p-2 bg-gradient-to-br from-white/5 to-transparent">
             <div className="bg-white dark:bg-black rounded-[2.8rem] overflow-hidden">
-               <div className="h-14 border-b border-black/5 dark:border-white/5 flex items-center px-8 gap-4">
+              <div className="h-14 border-b border-black/5 dark:border-white/5 flex items-center px-8 gap-4">
                 <div className="flex gap-1.5">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-500/20"></div>
                   <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20"></div>
@@ -134,8 +134,8 @@ const handleClaim = () => {
     abi: LENS_ABI,
     functionName: 'claimRewards'
   })
-}`}/>
-                    
+}`} />
+
                   </pre>
                 </div>
               </div>

@@ -136,8 +136,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, framework, itemName }) => {
 
   return (
     <div className="relative group mt-6">
-      <div className="bg-[#1e1e1e] rounded-[2rem] p-6 md:p-8 border border-white/5 overflow-x-auto min-h-[160px] shadow-2xl scrollbar-hide">
-        <div className="flex">
+      <div className="bg-[#1e1e1e] rounded-[2rem] p-6 md:p-8 border border-white/5 overflow-x-auto min-h-[160px] shadow-2xl scrollbar-hide overflow-hidden">
+        <div className="flex overflow-x-auto scrollbar-hide max-w-[200px] md:max-w-full">
           {/* Line numbers */}
           <div className="select-none text-right pr-4 border-r border-white/10">
             <div className="mono text-[11px] md:text-[13px] text-white/30">
@@ -148,7 +148,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, framework, itemName }) => {
           </div>
           
           {/* Code */}
-          <div className="flex-1 overflow-x-auto pl-4 scrollbar-hide">
+          <div className="flex-1 overflow-x-auto pl-4">
             <div 
               className="mono text-[11px] md:text-[13px] leading-relaxed whitespace-pre"
               style={{ 
@@ -193,13 +193,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, framework, itemName }) => {
           }
         `}</style>
       </div>
-      { framework && <div className="absolute top-4 right-4 flex gap-2">
-        <div className="glass px-3 py-1.5 rounded-xl text-[8px] font-bold uppercase tracking-widest opacity-60">
+      { framework && <div className="absolute top-4 right-4 flex gap-2 pointer-events-none">
+        {/* <div className="glass px-3 py-1.5 rounded-xl text-[8px] font-bold uppercase tracking-widest opacity-60 pointer-events-auto text-white/80 hover:text-white">
           {framework}
-        </div>
+        </div> */}
         <button
           onClick={copy}
-          className="glass px-5 py-2.5 rounded-2xl text-[9px] font-bold uppercase tracking-widest transition-all hover:scale-105 active:scale-95 text-white/80 hover:text-white"
+          className="glass px-5 py-2.5 rounded-2xl text-[9px] font-bold uppercase tracking-widest transition-all hover:scale-105 active:scale-95 text-white/80 hover:text-white pointer-events-auto"
         >
           {copied ? 'Copied' : 'Copy'}
         </button>
