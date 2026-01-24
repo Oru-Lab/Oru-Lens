@@ -9,20 +9,20 @@ const Team: React.FC = () => {
     { 
       name: "Nworah C. Gabriel", 
       role: "Lead Architect", 
-      bio: "Protocol-level strategist with obsession for DX optimization.",
-      img: "images/Saggio.jpeg"
+      bio: "Founder Oru Labs, Protocol-level strategist with obsession for DX optimization.",
+      img: "images/Saggio.png"
     },
     { 
-      name: "Beta", 
-      role: "Core UX Engineer", 
-      bio: "Bridging complex logic with visceral human-centered interfaces.",
-      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=256&h=256&auto=format&fit=crop"
+      name: "KarlaGod", 
+      role: "Advisor", 
+      bio: "Business Developer on web3, Founder Bitsave Protocol, building and helping businesses grow onchain and offchain.",
+      img: "images/KarlaGod.jpeg"
     },
     { 
-      name: "Gamma", 
-      role: "Solidity Specialist", 
-      bio: "Hardening contract bridges and verifying cryptographic primitives.",
-      img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=256&h=256&auto=format&fit=crop"
+      name: "Borderless Dev", 
+      role: "Web3 Communtiy", 
+      bio: "Borderless is a public-good builder institution that turns first-time builders into sustainable founders",
+      img: "images/BorderlessDev.jpg"
     }
   ];
 
