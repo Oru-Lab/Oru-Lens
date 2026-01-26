@@ -138,11 +138,14 @@ const FunctionCard: React.FC<{ item: AbiItem; address: string }> = ({ item, addr
   );
 };
 
+const ITEMS_PER_PAGE = 2;
+
 const Dashboard: React.FC = () => {
   const { contractId } = useParams<{ contractId: string }>();
   const [data, setData] = useState<ContractData | null>(null);
   const [activeCat, setActiveCat] = useState<'read' | 'write' | 'events'>('read');
   const [search, setSearch] = useState('');
+  const [pagination, setPagination] = useState<{ read: number; write: number; events: number }>({ read: 1, write: 1, events: 1 });
 
   useEffect(() => {
     const raw = localStorage.getItem(`oru-contract-${contractId}`);
@@ -153,12 +156,24 @@ const Dashboard: React.FC = () => {
     if (!data) return { read: [], write: [], events: [] };
     const filter = (i: AbiItem) => !search || i.name?.toLowerCase().includes(search.toLowerCase());
     
+    const read = data.abi.filter(i => i.type === 'function' && (i.stateMutability === 'view' || i.stateMutability === 'pure')).filter(filter);
+    const write = data.abi.filter(i => i.type === 'function' && !(i.stateMutability === 'view' || i.stateMutability === 'pure')).filter(filter);
+    const events = data.abi.filter(i => i.type === 'event').filter(filter);
+
+    // Apply pagination
+    const readStart = (pagination.read - 1) * ITEMS_PER_PAGE;
+    const writeStart = (pagination.write - 1) * ITEMS_PER_PAGE;
+    const eventsStart = (pagination.events - 1) * ITEMS_PER_PAGE;
+
     return {
-      read: data.abi.filter(i => i.type === 'function' && (i.stateMutability === 'view' || i.stateMutability === 'pure')).filter(filter),
-      write: data.abi.filter(i => i.type === 'function' && !(i.stateMutability === 'view' || i.stateMutability === 'pure')).filter(filter),
-      events: data.abi.filter(i => i.type === 'event').filter(filter),
+      read: read.slice(readStart, readStart + ITEMS_PER_PAGE),
+      write: write.slice(writeStart, writeStart + ITEMS_PER_PAGE),
+      events: events.slice(eventsStart, eventsStart + ITEMS_PER_PAGE),
+      totalRead: read.length,
+      totalWrite: write.length,
+      totalEvents: events.length,
     };
-  }, [data, search]);
+  }, [data, search, pagination]);
 
   if (!data) return (
     <div className="flex flex-col items-center justify-center h-[70vh] gap-8 sm:gap-10 md:gap-12">
@@ -216,13 +231,16 @@ const Dashboard: React.FC = () => {
           <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.3em] sm:tracking-[0.4em] opacity-20 mb-4 sm:mb-6 hidden lg:block">Navigation</div>
           <div className="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-1.5 sm:gap-2 pb-3 sm:pb-4 lg:pb-0 scrollbar-hide -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0">
             {[
-              { id: 'read', label: 'Read', count: categorized.read.length },
-              { id: 'write', label: 'Write', count: categorized.write.length },
-              { id: 'events', label: 'Events', count: categorized.events.length }
+              { id: 'read', label: 'Read', count: categorized.totalRead },
+              { id: 'write', label: 'Write', count: categorized.totalWrite },
+              { id: 'events', label: 'Events', count: categorized.totalEvents }
             ].map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setActiveCat(cat.id as any)}
+                onClick={() => {
+                  setActiveCat(cat.id as any);
+                  setPagination(prev => ({ ...prev, [cat.id]: 1 }));
+                }}
                 className={`flex-1 lg:w-full text-left px-4 sm:px-5 md:px-6 lg:px-7 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl transition-all flex justify-between items-center whitespace-nowrap gap-2 sm:gap-3 md:gap-4 ${
                   activeCat === cat.id 
                   ? 'bg-current text-inverted font-bold' 
@@ -282,6 +300,34 @@ const Dashboard: React.FC = () => {
                 </motion.div>
               )}
             </AnimatePresence>
+
+            {categorized[activeCat].length > 0 && (
+              <div className="flex items-center justify-between pt-6 sm:pt-8 md:pt-10 border-t border-current/5">
+                <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] opacity-40">
+                  Page {pagination[activeCat]} of {Math.ceil(categorized[`total${activeCat.charAt(0).toUpperCase() + activeCat.slice(1)}`] / ITEMS_PER_PAGE)}
+                </div>
+                <div className="flex gap-2 sm:gap-3">
+                  <button
+                    onClick={() => setPagination(prev => ({ ...prev, [activeCat]: Math.max(1, prev[activeCat] - 1) }))}
+                    disabled={pagination[activeCat] === 1}
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] border border-current/10 transition-all disabled:opacity-20 enabled:hover:bg-current/5"
+                  >
+                    ← Prev
+                  </button>
+                  <button
+                    onClick={() => {
+                      const total = categorized[`total${activeCat.charAt(0).toUpperCase() + activeCat.slice(1)}`];
+                      const maxPage = Math.ceil(total / ITEMS_PER_PAGE);
+                      setPagination(prev => ({ ...prev, [activeCat]: Math.min(maxPage, prev[activeCat] + 1) }));
+                    }}
+                    disabled={pagination[activeCat] >= Math.ceil(categorized[`total${activeCat.charAt(0).toUpperCase() + activeCat.slice(1)}`] / ITEMS_PER_PAGE)}
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] border border-current/10 transition-all disabled:opacity-20 enabled:hover:bg-current/5"
+                  >
+                    Next →
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </main>
       </div>
